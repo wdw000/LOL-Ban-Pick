@@ -1,9 +1,11 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
+import banPickSlice from "../features/ban-pick/banPickSlice";
+import championSlice from "../features/champion/championSlice";
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    champion: championSlice,
+    banPick: banPickSlice,
   },
 });
 

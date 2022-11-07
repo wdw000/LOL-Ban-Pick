@@ -1,0 +1,25 @@
+.top-ui > .top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.top-ui > .top > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.top-ui > .top > div > p:last-child {
+  font-size: 1.2rem;
+}
+
+.top-ui > .top > p {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.top-ui > .bottom {
+  display: flex;
+}
