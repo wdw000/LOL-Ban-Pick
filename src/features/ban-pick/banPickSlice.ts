@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 
-type BanPick = {
+export type BanPick = {
   team: "BLUE" | "RED";
   status: "PICK" | "BAN";
 };
@@ -24,7 +24,17 @@ const initialState: InitialState = {
 export const banPickSlice = createSlice({
   name: "banPick",
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    subRemainingTime: (state) => {
+      state.remainingTime -= 1;
+    },
+    addBanPickIndex: (state) => {
+      state.banPickIndex += 1;
+    },
+    setRemainingTime: (state) => {
+      state.remainingTime = 30;
+    },
+  },
 });
 
 export const selectRemainingTime = (state: RootState) =>
@@ -35,5 +45,8 @@ export const selectBanPickArray = (state: RootState) =>
 
 export const selectBanPickIndex = (state: RootState) =>
   state.banPick.banPickIndex;
+
+export const { subRemainingTime, addBanPickIndex, setRemainingTime } =
+  banPickSlice.actions;
 
 export default banPickSlice.reducer;

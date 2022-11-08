@@ -1,3 +1,7 @@
+.top-ui {
+  margin: 1rem 0;
+}
+
 .top-ui > .top {
   display: flex;
   justify-content: space-between;
@@ -11,10 +15,6 @@
   font-size: 1.5rem;
 }
 
-.top-ui > .top > div > p:last-child {
-  font-size: 1.2rem;
-}
-
 .top-ui > .top > p {
   font-size: 2rem;
   font-weight: bold;
@@ -22,4 +22,10 @@
 
 .top-ui > .bottom {
   display: flex;
+}
+
+.top-ui > .bottom > p {
+  font-size: 1.2rem;
+  margin: 0 1rem;
+  font-weight: bold;
 }

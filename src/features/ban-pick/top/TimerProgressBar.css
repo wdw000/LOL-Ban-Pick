@@ -1,0 +1,19 @@
+.timer-progress-bar {
+  flex: 1;
+  height: 1rem;
+  background-color: gray;
+}
+
+.timer-progress-bar > div {
+  height: inherit;
+  transition: width 1s linear;
+}
+
+.timer-progress-bar > .blue-side {
+  margin-left: auto;
+  background-color: blue;
+}
+
+.timer-progress-bar > .red-side {
+  background-color: red;
+}

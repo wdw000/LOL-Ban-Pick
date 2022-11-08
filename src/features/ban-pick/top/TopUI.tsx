@@ -4,6 +4,7 @@ import {
   selectBanPickIndex,
   selectRemainingTime,
 } from "../banPickSlice";
+import TimerProgressBar from "./TimerProgressBar";
 import "./TopUI.css";
 
 const Top = () => {
@@ -20,14 +21,14 @@ const Top = () => {
             {banPickArray[banPickIndex].team} TEAM{" "}
             {banPickArray[banPickIndex].status}
           </p>
-          <p>{remainingTime}</p>
         </div>
         <p>레드팀</p>
       </div>
 
       <div className="bottom">
-        <div>블루팀 남은 시간</div>
-        <div>레드팀 남은 시간</div>
+        <TimerProgressBar team="BLUE" />
+        <p>{remainingTime}</p>
+        <TimerProgressBar team="RED" />
       </div>
     </div>
   );
