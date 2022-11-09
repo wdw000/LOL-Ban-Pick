@@ -3,6 +3,10 @@ import { useAppDispatch, useAppSelector } from "./app/hooks";
 import ChampionList from "./features/champion/ChampionList";
 import { fetchChampionData } from "./features/champion/championSlice";
 import TopUI from "./features/ban-pick/top/TopUI";
+import PickList from "./features/ban-pick/pick/PickList";
+import "./App.css";
+import BanList from "./features/ban-pick/ban/BanList";
+import ChampionSearch from "./features/champion/ChampionSearch";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -18,7 +22,22 @@ function App() {
   return (
     <div className="App">
       <TopUI />
-      <ChampionList />
+      <div className="main">
+        <div className="side">
+          <PickList team="BLUE" />
+          <BanList team="BLUE" />
+        </div>
+
+        <div className="champion">
+          <ChampionSearch />
+          <ChampionList />
+        </div>
+
+        <div className="side">
+          <PickList team="RED" />
+          <BanList team="RED" />
+        </div>
+      </div>
     </div>
   );
 }

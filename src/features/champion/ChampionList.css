@@ -1,4 +1,10 @@
 .champion-list {
+  border: solid;
+  height: 100%;
+  overflow: scroll;
+}
+
+.champion-list > ul {
   display: flex;
   flex-wrap: wrap;
   align-items: center;

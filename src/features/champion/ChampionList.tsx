@@ -6,6 +6,7 @@ import "./ChampionList.css";
 const ChampionList = () => {
   const championsAllData = useAppSelector(selectAllChampionDatas);
   let listData: ChampionInfo[] = [];
+  let filterData: ChampionInfo[] = [];
 
   if (championsAllData) {
     for (let key in championsAllData) {
@@ -25,11 +26,15 @@ const ChampionList = () => {
     });
   }
 
-  const list = listData.map((item) => (
+  const list = filterData.map((item) => (
     <ChampionItem data={item} key={item.key} />
   ));
 
-  return <ul className="champion-list">{list}</ul>;
+  return (
+    <div className="champion-list">
+      <ul>{list}</ul>
+    </div>
+  );
 };
 
 export default ChampionList;

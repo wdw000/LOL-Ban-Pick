@@ -1,0 +1,16 @@
+.App {
+  height: 100vh;
+}
+
+.App > .main {
+  display: flex;
+  height: 80%;
+}
+
+.App > .main > .side {
+  flex: 0.8;
+}
+
+.App > .main > .champion {
+  flex: 2;
+}

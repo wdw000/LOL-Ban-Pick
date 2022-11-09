@@ -1,10 +1,11 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 
 interface InitialState {
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | undefined;
   data: ChampionDatas;
+  search: string;
 }
 
 interface ChampionData {
@@ -75,6 +76,7 @@ const initialState: InitialState = {
     version: null,
   },
   error: undefined,
+  search: "",
 };
 
 export const fetchChampionData = createAsyncThunk(
@@ -91,7 +93,11 @@ export const fetchChampionData = createAsyncThunk(
 export const championSlice = createSlice({
   name: "champion",
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    setSearch: (state, action: PayloadAction<InitialState["search"]>) => {
+      state.search = action.payload;
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchChampionData.pending, (state, action) => {
@@ -108,9 +114,11 @@ export const championSlice = createSlice({
   },
 });
 
-// export const {} = championSlice.actions;
+export const { setSearch } = championSlice.actions;
 
 export const selectAllChampionDatas = (state: RootState) =>
   state.champion.data.data;
+
+export const selectSearch = (state: RootState) => state.champion.search;
 
 export default championSlice.reducer;
