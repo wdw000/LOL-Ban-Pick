@@ -1,0 +1,28 @@
+.pick-item {
+  height: 20%;
+  overflow: hidden;
+  position: relative;
+  background: gray;
+}
+
+.pick-item img {
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+}
+
+.pick-item p {
+  color: white;
+  position: absolute;
+  z-index: 2;
+}
+
+.pick-item .champion-name {
+  top: 1rem;
+  right: 1rem;
+}
+
+.pick-item .player {
+  bottom: 1rem;
+  right: 1rem;
+}

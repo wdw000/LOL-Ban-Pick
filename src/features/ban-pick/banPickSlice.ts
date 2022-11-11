@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 
 export type BanPick = {
@@ -8,12 +8,13 @@ export type BanPick = {
 
 export interface TeamPick {
   player: string;
-  champion: string;
+  championName: string;
+  championIMG: string;
 }
 
 export interface BanObj {
   id: string;
-  championID: string;
+  championIMG: string;
 }
 
 interface InitialState {
@@ -56,35 +57,37 @@ const initialState: InitialState = {
     { team: "RED", status: "PICK" },
   ],
   bluePick: new Array<TeamPick>(5)
-    .fill({ player: "BLUE", champion: "" })
+    .fill({ player: "BLUE", championName: "", championIMG: "" })
     .map((item, idx) => {
       return {
         player: `${item.player} ${idx + 1}`,
-        champion: "",
+        championName: item.championName,
+        championIMG: item.championIMG,
       };
     }),
   redPick: new Array<TeamPick>(5)
-    .fill({ player: "RED", champion: "" })
+    .fill({ player: "RED", championName: "", championIMG: "" })
     .map((item, idx) => {
       return {
         player: `${item.player} ${idx + 1}`,
-        champion: "",
+        championName: item.championName,
+        championIMG: item.championIMG,
       };
     }),
   blueBan: new Array<BanObj>(5)
-    .fill({ id: "BLUE", championID: "" })
+    .fill({ id: "BLUE", championIMG: "" })
     .map((item, idx) => {
       return {
         id: `${item.id}${idx}`,
-        championID: "",
+        championIMG: item.championIMG,
       };
     }),
   redBan: new Array<BanObj>(5)
-    .fill({ id: "RED", championID: "" })
+    .fill({ id: "RED", championIMG: "" })
     .map((item, idx) => {
       return {
         id: `${item.id}${idx}`,
-        championID: "",
+        championIMG: item.championIMG,
       };
     }),
   bluePickIndex: 0,
@@ -105,6 +108,56 @@ export const banPickSlice = createSlice({
     },
     setRemainingTime: (state) => {
       state.remainingTime = 30;
+    },
+    addBanPickChampion: (
+      state,
+      action: PayloadAction<
+        BanPick & { championIMG: string; championName: string }
+      >
+    ) => {
+      if (action.payload.team === "BLUE") {
+        if (action.payload.status === "BAN") {
+          state.blueBan[state.blueBanIndex].championIMG =
+            action.payload.championIMG;
+        } else if (action.payload.status === "PICK") {
+          state.bluePick[state.bluePickIndex].championName =
+            action.payload.championName;
+          state.bluePick[state.bluePickIndex].championIMG =
+            action.payload.championIMG;
+        }
+      } else if (action.payload.team === "RED") {
+        if (action.payload.status === "BAN") {
+          state.redBan[state.redBanIndex].championIMG =
+            action.payload.championIMG;
+        } else if (action.payload.status === "PICK") {
+          state.redPick[state.redPickIndex].championName =
+            action.payload.championName;
+          state.redPick[state.redPickIndex].championIMG =
+            action.payload.championIMG;
+        }
+      }
+    },
+    addTeamBanPickIndex: (state, action: PayloadAction<BanPick>) => {
+      if (action.payload.team === "BLUE") {
+        if (action.payload.status === "BAN") {
+          state.blueBanIndex += 1;
+        } else if (action.payload.status === "PICK") {
+          state.bluePickIndex += 1;
+        }
+      } else if (action.payload.team === "RED") {
+        if (action.payload.status === "BAN") {
+          state.redBanIndex += 1;
+        } else if (action.payload.status === "PICK") {
+          state.redPickIndex += 1;
+        }
+      }
+    },
+    addNullBan: (state, action: PayloadAction<BanPick["team"]>) => {
+      if (action.payload === "BLUE") {
+        state.blueBan[state.blueBanIndex].championIMG = "";
+      } else if (action.payload === "RED") {
+        state.redBan[state.redBanIndex].championIMG = "";
+      }
     },
   },
 });
@@ -143,7 +196,13 @@ export function selectTeamBan(team: BanPick["team"] | undefined) {
   }
 }
 
-export const { subRemainingTime, addBanPickIndex, setRemainingTime } =
-  banPickSlice.actions;
+export const {
+  subRemainingTime,
+  addBanPickIndex,
+  setRemainingTime,
+  addBanPickChampion,
+  addTeamBanPickIndex,
+  addNullBan,
+} = banPickSlice.actions;
 
 export default banPickSlice.reducer;

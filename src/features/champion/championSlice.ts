@@ -83,7 +83,7 @@ export const fetchChampionData = createAsyncThunk(
   "champion/fetchChampionData",
   async () => {
     const response = await fetch(
-      `http://ddragon.leagueoflegends.com/cdn/12.21.1/data/ko_KR/champion.json?api_key=${process.env.REACT_APP_RIOT_API}`
+      `http://ddragon.leagueoflegends.com/cdn/12.21.1/data/ko_KR/champion.json`
     );
 
     return await response.json();

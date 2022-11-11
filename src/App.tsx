@@ -7,10 +7,10 @@ import PickList from "./features/ban-pick/pick/PickList";
 import "./App.css";
 import BanList from "./features/ban-pick/ban/BanList";
 import ChampionSearch from "./features/champion/ChampionSearch";
+import ChampionBtn from "./features/champion/ChampionBtn";
 
 function App() {
   const dispatch = useAppDispatch();
-
   const championDatasStatus = useAppSelector((state) => state.champion.status);
 
   useEffect(() => {
@@ -31,6 +31,7 @@ function App() {
         <div className="champion">
           <ChampionSearch />
           <ChampionList />
+          <ChampionBtn />
         </div>
 
         <div className="side">
