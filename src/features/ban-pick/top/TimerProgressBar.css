@@ -1,7 +1,7 @@
 .timer-progress-bar {
   flex: 1;
   height: 1rem;
-  background-color: gray;
+  background-color: var(--box-bg-color);
 }
 
 .timer-progress-bar > div {

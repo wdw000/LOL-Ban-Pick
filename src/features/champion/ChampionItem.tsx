@@ -22,7 +22,6 @@ const ChampionItem = (props: ChampionItemProps) => {
       addBanPickChampion({
         ...currentBanPick,
         championIMG: props.data.id,
-        championName: props.data.name,
       })
     );
   };

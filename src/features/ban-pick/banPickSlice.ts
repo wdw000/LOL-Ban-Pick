@@ -8,7 +8,6 @@ export type BanPick = {
 
 export interface TeamPick {
   player: string;
-  championName: string;
   championIMG: string;
 }
 
@@ -57,20 +56,18 @@ const initialState: InitialState = {
     { team: "RED", status: "PICK" },
   ],
   bluePick: new Array<TeamPick>(5)
-    .fill({ player: "BLUE", championName: "", championIMG: "" })
+    .fill({ player: "BLUE", championIMG: "" })
     .map((item, idx) => {
       return {
         player: `${item.player} ${idx + 1}`,
-        championName: item.championName,
         championIMG: item.championIMG,
       };
     }),
   redPick: new Array<TeamPick>(5)
-    .fill({ player: "RED", championName: "", championIMG: "" })
+    .fill({ player: "RED", championIMG: "" })
     .map((item, idx) => {
       return {
         player: `${item.player} ${idx + 1}`,
-        championName: item.championName,
         championIMG: item.championIMG,
       };
     }),
@@ -111,17 +108,13 @@ export const banPickSlice = createSlice({
     },
     addBanPickChampion: (
       state,
-      action: PayloadAction<
-        BanPick & { championIMG: string; championName: string }
-      >
+      action: PayloadAction<BanPick & { championIMG: string }>
     ) => {
       if (action.payload.team === "BLUE") {
         if (action.payload.status === "BAN") {
           state.blueBan[state.blueBanIndex].championIMG =
             action.payload.championIMG;
         } else if (action.payload.status === "PICK") {
-          state.bluePick[state.bluePickIndex].championName =
-            action.payload.championName;
           state.bluePick[state.bluePickIndex].championIMG =
             action.payload.championIMG;
         }
@@ -130,8 +123,6 @@ export const banPickSlice = createSlice({
           state.redBan[state.redBanIndex].championIMG =
             action.payload.championIMG;
         } else if (action.payload.status === "PICK") {
-          state.redPick[state.redPickIndex].championName =
-            action.payload.championName;
           state.redPick[state.redPickIndex].championIMG =
             action.payload.championIMG;
         }

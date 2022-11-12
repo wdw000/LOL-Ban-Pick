@@ -1,7 +1,11 @@
 .champion-list {
-  border: solid;
   height: 100%;
   overflow: scroll;
+  -ms-overflow-style: none;
+}
+
+.champion-list::-webkit-scrollbar {
+  display: none;
 }
 
 .champion-list > ul {

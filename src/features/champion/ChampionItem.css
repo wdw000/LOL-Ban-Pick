@@ -1,3 +1,8 @@
 .champion-item {
   width: 12.5%;
+  text-align: center;
+}
+
+.champion-item p {
+  margin: 0.5rem 0;
 }

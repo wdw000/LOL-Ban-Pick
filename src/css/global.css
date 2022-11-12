@@ -1,0 +1,9 @@
+html {
+  background-color: var(--main-bg-color);
+  color: var(--main-font-color);
+}
+
+body {
+  max-width: 1920px;
+  margin: 0 auto;
+}

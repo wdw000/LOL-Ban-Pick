@@ -11,7 +11,7 @@ const PickList = (props: PickListProps) => {
   let teamPick = useAppSelector(selectTeamPick(props.team));
 
   const item = teamPick.map((item) => (
-    <PickItem data={item} key={item.player} />
+    <PickItem team={props.team} data={item} key={item.player} />
   ));
   return <ul className="pick-list">{item}</ul>;
 };

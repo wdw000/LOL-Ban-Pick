@@ -73,7 +73,6 @@ const ChampionList = () => {
               addBanPickChampion({
                 ...currentBanPick,
                 championIMG: listData[random].id,
-                championName: listData[random].name,
               })
             );
             dispatch(addTeamBanPickIndex(currentBanPick));
