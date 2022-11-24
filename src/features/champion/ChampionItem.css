@@ -3,6 +3,10 @@
   text-align: center;
 }
 
+.champion-item[class*="hidden"] {
+  display: none;
+}
+
 .champion-item p {
   margin: 0.5rem 0;
 }

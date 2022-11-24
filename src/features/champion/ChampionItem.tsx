@@ -1,4 +1,4 @@
-import { ChampionInfo } from "./championSlice";
+import { ChampionInfo, selectSearch } from "./championSlice";
 import "./ChampionItem.css";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import {
@@ -14,6 +14,7 @@ interface ChampionItemProps {
 const ChampionItem = (props: ChampionItemProps) => {
   const banPickArray = useAppSelector(selectBanPickArray);
   const banPickIndex = useAppSelector(selectBanPickIndex);
+  const search = useAppSelector(selectSearch);
   const dispatch = useAppDispatch();
   const currentBanPick = banPickArray[banPickIndex];
 
@@ -27,7 +28,14 @@ const ChampionItem = (props: ChampionItemProps) => {
   };
 
   return (
-    <li className="champion-item" onClick={handleListClick}>
+    <li
+      className={
+        props.data.name.includes(search)
+          ? "champion-item"
+          : "champion-item hidden"
+      }
+      onClick={handleListClick}
+    >
       <img
         src={`http://ddragon.leagueoflegends.com/cdn/${props.data.version}/img/champion/${props.data.image.full}`}
         alt={props.data.id}

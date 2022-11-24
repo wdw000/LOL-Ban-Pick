@@ -4,7 +4,7 @@ import { RootState } from "../../app/store";
 interface InitialState {
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | undefined;
-  data: ChampionDatas;
+  data: ChampionInfo[];
   search: string;
 }
 
@@ -58,6 +58,8 @@ export interface ChampionInfo {
   tags: string[];
   title: string;
   version: string;
+  show: boolean;
+  checked: boolean;
 }
 
 interface ChampionDatas {
@@ -69,12 +71,7 @@ interface ChampionDatas {
 
 const initialState: InitialState = {
   status: "idle",
-  data: {
-    data: null,
-    format: null,
-    type: null,
-    version: null,
-  },
+  data: [],
   error: undefined,
   search: "",
 };
@@ -103,10 +100,36 @@ export const championSlice = createSlice({
       .addCase(fetchChampionData.pending, (state, action) => {
         state.status = "loading";
       })
-      .addCase(fetchChampionData.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.data = action.payload;
-      })
+      .addCase(
+        fetchChampionData.fulfilled,
+        (state, action: PayloadAction<ChampionDatas>) => {
+          const championData = action.payload.data;
+          const championArray: ChampionInfo[] = [];
+
+          for (const key in championData) {
+            const data: ChampionInfo = {
+              ...championData[key],
+              show: true,
+              checked: false,
+            };
+
+            championArray.push(data);
+          }
+
+          championArray.sort((a, b) => {
+            if (a.name < b.name) {
+              return -1;
+            } else if (a.name > b.name) {
+              return 1;
+            } else {
+              return 0;
+            }
+          });
+
+          state.status = "succeeded";
+          state.data = championArray;
+        }
+      )
       .addCase(fetchChampionData.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
@@ -116,8 +139,7 @@ export const championSlice = createSlice({
 
 export const { setSearch } = championSlice.actions;
 
-export const selectAllChampionDatas = (state: RootState) =>
-  state.champion.data.data;
+export const selectAllChampionDatas = (state: RootState) => state.champion.data;
 
 export const selectSearch = (state: RootState) => state.champion.search;
 

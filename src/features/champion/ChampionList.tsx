@@ -1,12 +1,8 @@
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import ChampionItem from "./ChampionItem";
-import {
-  ChampionInfo,
-  selectAllChampionDatas,
-  selectSearch,
-} from "./championSlice";
+import { selectAllChampionDatas } from "./championSlice";
 import "./ChampionList.css";
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import {
   addBanPickChampion,
   addBanPickIndex,
@@ -21,41 +17,11 @@ import {
 
 const ChampionList = () => {
   const championsAllData = useAppSelector(selectAllChampionDatas);
-  const search = useAppSelector(selectSearch);
   const remainingTime = useAppSelector(selectRemainingTime);
   const banPickArray = useAppSelector(selectBanPickArray);
   const banPickIndex = useAppSelector(selectBanPickIndex);
   const currentBanPick = banPickArray[banPickIndex];
   const dispatch = useAppDispatch();
-
-  let filterData: ChampionInfo[] = [];
-
-  function makeListData() {
-    let listData: ChampionInfo[] = [];
-
-    if (championsAllData) {
-      for (let key in championsAllData) {
-        listData.push(championsAllData[key]);
-      }
-
-      listData.sort((a, b) => {
-        if (a.name < b.name) {
-          return -1;
-        }
-
-        if (a.name > b.name) {
-          return 1;
-        }
-
-        return 0;
-      });
-    }
-
-    return listData;
-  }
-
-  const listData = useMemo(makeListData, [championsAllData]);
-  filterData = listData.filter((item) => item.name.includes(search));
 
   useEffect(() => {
     const countDown = setInterval(() => {
@@ -68,11 +34,11 @@ const ChampionList = () => {
             dispatch(addNullBan(currentBanPick.team));
             dispatch(addTeamBanPickIndex(currentBanPick));
           } else if (currentBanPick.status === "PICK") {
-            const random = Math.floor(Math.random() * listData.length);
+            const random = Math.floor(Math.random() * championsAllData.length);
             dispatch(
               addBanPickChampion({
                 ...currentBanPick,
-                championIMG: listData[random].id,
+                championIMG: championsAllData[random].id,
               })
             );
             dispatch(addTeamBanPickIndex(currentBanPick));
@@ -92,10 +58,10 @@ const ChampionList = () => {
     banPickArray,
     banPickIndex,
     currentBanPick,
-    listData,
+    championsAllData,
   ]);
 
-  const list = filterData.map((item) => (
+  const list = championsAllData.map((item) => (
     <ChampionItem data={item} key={item.key} />
   ));
 
