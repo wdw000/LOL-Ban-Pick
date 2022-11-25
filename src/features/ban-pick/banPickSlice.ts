@@ -169,6 +169,7 @@ export const selectRedPick = (state: RootState) => state.banPick.redPick;
 export function selectTeamPick(team: BanPick["team"] | undefined) {
   const bluePick = (state: RootState) => state.banPick.bluePick;
   const redPick = (state: RootState) => state.banPick.redPick;
+
   if (team === "BLUE") {
     return bluePick;
   } else {
@@ -184,6 +185,53 @@ export function selectTeamBan(team: BanPick["team"] | undefined) {
     return blueBan;
   } else {
     return redBan;
+  }
+}
+
+export function selectCurrentBanORPick(currentBanPick: BanPick) {
+  if (currentBanPick.team === "BLUE") {
+    if (currentBanPick.status === "BAN") {
+      return (state: RootState) =>
+        state.banPick.blueBan[state.banPick.blueBanIndex].championIMG;
+    } else {
+      return (state: RootState) =>
+        state.banPick.bluePick[state.banPick.bluePickIndex].championIMG;
+    }
+  } else {
+    if (currentBanPick.status === "BAN") {
+      return (state: RootState) =>
+        state.banPick.redBan[state.banPick.redBanIndex].championIMG;
+    } else {
+      return (state: RootState) =>
+        state.banPick.redPick[state.banPick.redPickIndex].championIMG;
+    }
+  }
+}
+
+export const selectAllTeamBanPick = (state: RootState) => {
+  const result = [
+    ...state.banPick.blueBan,
+    ...state.banPick.redBan,
+    ...state.banPick.bluePick,
+    ...state.banPick.redPick,
+  ];
+
+  return result;
+};
+
+export function selectTeamBanIndex(team: BanPick["team"]) {
+  if (team === "BLUE") {
+    return (state: RootState) => state.banPick.blueBanIndex;
+  } else {
+    return (state: RootState) => state.banPick.redBanIndex;
+  }
+}
+
+export function selectTeamPickIndex(team: BanPick["team"]) {
+  if (team === "BLUE") {
+    return (state: RootState) => state.banPick.bluePickIndex;
+  } else {
+    return (state: RootState) => state.banPick.redPickIndex;
   }
 }
 

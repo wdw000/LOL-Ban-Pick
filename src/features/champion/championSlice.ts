@@ -58,8 +58,6 @@ export interface ChampionInfo {
   tags: string[];
   title: string;
   version: string;
-  show: boolean;
-  checked: boolean;
 }
 
 interface ChampionDatas {
@@ -109,8 +107,6 @@ export const championSlice = createSlice({
           for (const key in championData) {
             const data: ChampionInfo = {
               ...championData[key],
-              show: true,
-              checked: false,
             };
 
             championArray.push(data);

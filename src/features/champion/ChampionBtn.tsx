@@ -4,6 +4,7 @@ import {
   addTeamBanPickIndex,
   selectBanPickArray,
   selectBanPickIndex,
+  selectCurrentBanORPick,
   setRemainingTime,
 } from "../ban-pick/banPickSlice";
 
@@ -12,12 +13,17 @@ const ChampionBtn = () => {
   const banPickArray = useAppSelector(selectBanPickArray);
   const banPickIndex = useAppSelector(selectBanPickIndex);
   const currentBanPick = banPickArray[banPickIndex];
+  const currentBanORPick = useAppSelector(
+    selectCurrentBanORPick(currentBanPick)
+  );
 
   const handleBtn = () => {
     if (banPickArray.length - 1 > banPickIndex) {
-      dispatch(addTeamBanPickIndex(currentBanPick));
-      dispatch(addBanPickIndex());
-      dispatch(setRemainingTime());
+      if (currentBanORPick !== "") {
+        dispatch(addTeamBanPickIndex(currentBanPick));
+        dispatch(addBanPickIndex());
+        dispatch(setRemainingTime());
+      }
     } else {
       console.log("done");
     }

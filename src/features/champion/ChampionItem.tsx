@@ -3,6 +3,7 @@ import "./ChampionItem.css";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import {
   addBanPickChampion,
+  selectAllTeamBanPick,
   selectBanPickArray,
   selectBanPickIndex,
 } from "../ban-pick/banPickSlice";
@@ -14,6 +15,9 @@ interface ChampionItemProps {
 const ChampionItem = (props: ChampionItemProps) => {
   const banPickArray = useAppSelector(selectBanPickArray);
   const banPickIndex = useAppSelector(selectBanPickIndex);
+  const allTeamBanPick = useAppSelector(selectAllTeamBanPick).map(
+    (item) => item.championIMG
+  );
   const search = useAppSelector(selectSearch);
   const dispatch = useAppDispatch();
   const currentBanPick = banPickArray[banPickIndex];
@@ -30,11 +34,13 @@ const ChampionItem = (props: ChampionItemProps) => {
   return (
     <li
       className={
-        props.data.name.includes(search)
-          ? "champion-item"
-          : "champion-item hidden"
+        "champion-item" +
+        (props.data.name.includes(search) ? "" : " hidden") +
+        (allTeamBanPick.includes(props.data.id) ? " checked" : "")
       }
-      onClick={handleListClick}
+      onClick={
+        allTeamBanPick.includes(props.data.id) ? undefined : handleListClick
+      }
     >
       <img
         src={`http://ddragon.leagueoflegends.com/cdn/${props.data.version}/img/champion/${props.data.image.full}`}

@@ -5,3 +5,27 @@
 .ban-item > img {
   width: 100%;
 }
+
+.ban-item > img[class*="current"] {
+  animation: infinite blink 1.5s;
+}
+
+.ban-item > img[class*="current red"] {
+  background-color: red;
+}
+
+.ban-item > img[class*="current blue"] {
+  background-color: blue;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}

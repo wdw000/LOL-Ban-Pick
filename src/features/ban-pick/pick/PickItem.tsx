@@ -4,11 +4,14 @@ import "./PickItem.css";
 interface PickItemProps {
   data: TeamPick;
   team: BanPick["team"];
+  checked: boolean;
 }
 
 const PickItem = (props: PickItemProps) => {
   return (
-    <li className="pick-item">
+    <li
+      className={"pick-item" + (props.checked ? ` current ${props.team}` : "")}
+    >
       <p
         className={
           props.team === "BLUE" ? "champion-name" : "champion-name red"

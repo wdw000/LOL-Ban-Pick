@@ -10,3 +10,7 @@
 .champion-item p {
   margin: 0.5rem 0;
 }
+
+.champion-item[class*="checked"] > img {
+  filter: grayscale(100%) blur(2px);
+}
