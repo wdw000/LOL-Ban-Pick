@@ -7,6 +7,7 @@ import reportWebVitals from "./reportWebVitals";
 import "./css/reset.css";
 import "./css/color.css";
 import "./css/global.css";
+import "./css/animation.css";
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);

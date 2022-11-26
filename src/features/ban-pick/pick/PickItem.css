@@ -5,18 +5,6 @@
   background: var(--box-bg-color);
 }
 
-.pick-item[class*="current"] {
-  animation: infinite blink 1.5s;
-}
-
-.pick-item[class*="current RED"] {
-  background-color: red;
-}
-
-.pick-item[class*="current BLUE"] {
-  background-color: blue;
-}
-
 .pick-item > .filter {
   background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
   position: absolute;
@@ -29,6 +17,20 @@
 
 .pick-item > .filter[class*="blue"] {
   background: linear-gradient(to left, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+}
+
+.pick-item > .filter[class*="current"] {
+  animation: infinite 1s;
+}
+
+.pick-item > .filter[class*="current"][class*="blue"] {
+  background: linear-gradient(to left, rgba(0, 0, 255, 0.8), rgba(0, 0, 0, 0));
+  animation-name: blink-pick-blue;
+}
+
+.pick-item > .filter[class*="current"][class*="red"] {
+  background: linear-gradient(to right, rgba(255, 0, 0, 0.8), rgba(0, 0, 0, 0));
+  animation-name: blink-pick-red;
 }
 
 .pick-item img {
@@ -66,16 +68,4 @@
 
 .pick-item img[class*="blue"] {
   transform: scaleX(-1);
-}
-
-@keyframes blink {
-  0% {
-    opacity: 0.3;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0.3;
-  }
 }

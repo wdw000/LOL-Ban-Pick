@@ -1,31 +1,36 @@
 .ban-item {
   flex: 1;
+  position: relative;
+}
+
+.ban-item::after {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
+}
+
+.ban-item > div {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+.ban-item > div[class*="current"] {
+  animation: infinite 1s;
+}
+
+.ban-item > div[class*="blue"] {
+  animation-name: blink-ban-blue;
+}
+
+.ban-item > div[class*="red"] {
+  animation-name: blink-ban-red;
 }
 
 .ban-item > img {
   width: 100%;
-}
-
-.ban-item > img[class*="current"] {
-  animation: infinite blink 1.5s;
-}
-
-.ban-item > img[class*="current red"] {
-  background-color: red;
-}
-
-.ban-item > img[class*="current blue"] {
-  background-color: blue;
-}
-
-@keyframes blink {
-  0% {
-    opacity: 0.3;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0.3;
-  }
+  height: 100%;
+  position: absolute;
+  z-index: 1;
 }

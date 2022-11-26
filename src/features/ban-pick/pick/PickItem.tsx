@@ -9,9 +9,7 @@ interface PickItemProps {
 
 const PickItem = (props: PickItemProps) => {
   return (
-    <li
-      className={"pick-item" + (props.checked ? ` current ${props.team}` : "")}
-    >
+    <li className={"pick-item"}>
       <p
         className={
           props.team === "BLUE" ? "champion-name" : "champion-name red"
@@ -30,7 +28,13 @@ const PickItem = (props: PickItemProps) => {
         />
       )}
 
-      <div className={props.team === "BLUE" ? "filter blue" : "filter"}></div>
+      <div
+        className={
+          "filter" +
+          (props.team === "BLUE" ? " blue" : " red") +
+          (props.checked ? ` current` : "")
+        }
+      ></div>
     </li>
   );
 };

@@ -17,12 +17,14 @@ const BanItem = (props: BanItemProps) => {
             ? close
             : `http://ddragon.leagueoflegends.com/cdn/12.21.1/img/champion/${props.data.championIMG}.png`
         }
+        alt={props.data.id}
+      />
+      <div
         className={
           (props.checked ? " current" : "") +
           (props.team === "BLUE" ? " blue" : " red")
         }
-        alt={props.data.id}
-      />
+      ></div>
     </li>
   );
 };

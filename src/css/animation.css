@@ -1,0 +1,50 @@
+/* ------------------------BAN---------------------------------- */
+
+@keyframes blink-ban-blue {
+  0% {
+    box-shadow: inset 0px 0px 2rem 1px rgba(0, 0, 255, 0.5);
+  }
+  50% {
+    box-shadow: inset 0px 0px 2rem 1px blue;
+  }
+  100% {
+    box-shadow: inset 0px 0px 2rem 1px rgba(0, 0, 255, 0.5);
+  }
+}
+
+@keyframes blink-ban-red {
+  0% {
+    box-shadow: inset 0px 0px 2rem 1px rgba(255, 0, 0, 0.5);
+  }
+  50% {
+    box-shadow: inset 0px 0px 2rem 1px rgba(255, 0, 0, 1);
+  }
+  100% {
+    box-shadow: inset 0px 0px 2rem 1px rgba(255, 0, 0, 0.5);
+  }
+}
+
+/* ------------------------PICK---------------------------------- */
+@keyframes blink-pick-blue {
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes blink-pick-red {
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
