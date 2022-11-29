@@ -76,9 +76,9 @@ const initialState: InitialState = {
 
 export const fetchChampionData = createAsyncThunk(
   "champion/fetchChampionData",
-  async () => {
+  async (version: string) => {
     const response = await fetch(
-      `http://ddragon.leagueoflegends.com/cdn/12.21.1/data/ko_KR/champion.json`
+      `http://ddragon.leagueoflegends.com/cdn/${version}/data/ko_KR/champion.json`
     );
 
     return await response.json();

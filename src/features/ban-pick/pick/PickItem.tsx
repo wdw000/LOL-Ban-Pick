@@ -1,3 +1,4 @@
+import { useAppSelector } from "../../../app/hooks";
 import { BanPick, TeamPick } from "../banPickSlice";
 import "./PickItem.css";
 
@@ -8,6 +9,8 @@ interface PickItemProps {
 }
 
 const PickItem = (props: PickItemProps) => {
+  const status = useAppSelector((state) => state.banPick.status);
+
   return (
     <li className={"pick-item"}>
       <p
@@ -32,7 +35,7 @@ const PickItem = (props: PickItemProps) => {
         className={
           "filter" +
           (props.team === "BLUE" ? " blue" : " red") +
-          (props.checked ? ` current` : "")
+          (props.checked && status === "start" ? ` current` : "")
         }
       ></div>
     </li>

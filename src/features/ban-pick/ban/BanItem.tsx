@@ -1,6 +1,7 @@
 import { BanObj, BanPick } from "../banPickSlice";
 import "./BanItem.css";
 import close from "../../../img/close_FILL0_wght400_GRAD0_opsz48.svg";
+import { useAppSelector } from "../../../app/hooks";
 
 interface BanItemProps {
   data: BanObj;
@@ -9,6 +10,8 @@ interface BanItemProps {
 }
 
 const BanItem = (props: BanItemProps) => {
+  const status = useAppSelector((state) => state.banPick.status);
+
   return (
     <li className={"ban-item"}>
       <img
@@ -21,7 +24,7 @@ const BanItem = (props: BanItemProps) => {
       />
       <div
         className={
-          (props.checked ? " current" : "") +
+          (props.checked && status === "start" ? " current" : "") +
           (props.team === "BLUE" ? " blue" : " red")
         }
       ></div>

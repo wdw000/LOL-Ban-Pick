@@ -21,6 +21,7 @@ const ChampionItem = (props: ChampionItemProps) => {
   const search = useAppSelector(selectSearch);
   const dispatch = useAppDispatch();
   const currentBanPick = banPickArray[banPickIndex];
+  const status = useAppSelector((state) => state.banPick.status);
 
   const handleListClick = () => {
     dispatch(
@@ -39,7 +40,9 @@ const ChampionItem = (props: ChampionItemProps) => {
         (allTeamBanPick.includes(props.data.id) ? " checked" : "")
       }
       onClick={
-        allTeamBanPick.includes(props.data.id) ? undefined : handleListClick
+        allTeamBanPick.includes(props.data.id) || status === "done"
+          ? undefined
+          : handleListClick
       }
     >
       <img

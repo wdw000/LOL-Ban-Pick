@@ -15,14 +15,14 @@ const Top = () => {
   return (
     <div className="top-ui">
       <div className="top">
-        <p>블루팀</p>
+        <p>BLUE</p>
         <div>
           <p>
             {banPickArray[banPickIndex].team} TEAM{" "}
             {banPickArray[banPickIndex].status}
           </p>
         </div>
-        <p>레드팀</p>
+        <p>RED</p>
       </div>
 
       <div className="bottom">

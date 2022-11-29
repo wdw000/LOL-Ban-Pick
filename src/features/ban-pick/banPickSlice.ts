@@ -17,6 +17,7 @@ export interface BanObj {
 }
 
 interface InitialState {
+  status: "start" | "done";
   remainingTime: number;
   banPickIndex: number;
   banPickArray: BanPick[];
@@ -31,6 +32,7 @@ interface InitialState {
 }
 
 const initialState: InitialState = {
+  status: "done",
   remainingTime: 30,
   banPickIndex: 0,
   banPickArray: [
@@ -90,13 +92,16 @@ const initialState: InitialState = {
   bluePickIndex: 0,
   redPickIndex: 0,
   blueBanIndex: 0,
-  redBanIndex: 0,
+  redBanIndex: 4,
 };
 
 export const banPickSlice = createSlice({
   name: "banPick",
   initialState: initialState,
   reducers: {
+    setStatus: (state, action: PayloadAction<InitialState["status"]>) => {
+      state.status = action.payload;
+    },
     subRemainingTime: (state) => {
       state.remainingTime -= 1;
     },
@@ -137,7 +142,7 @@ export const banPickSlice = createSlice({
         }
       } else if (action.payload.team === "RED") {
         if (action.payload.status === "BAN") {
-          state.redBanIndex += 1;
+          state.redBanIndex -= 1;
         } else if (action.payload.status === "PICK") {
           state.redPickIndex += 1;
         }
@@ -149,6 +154,17 @@ export const banPickSlice = createSlice({
       } else if (action.payload === "RED") {
         state.redBan[state.redBanIndex].championIMG = "";
       }
+    },
+    initData: (state) => {
+      state.banPickIndex = initialState.banPickIndex;
+      state.blueBan = initialState.blueBan;
+      state.blueBanIndex = initialState.blueBanIndex;
+      state.bluePick = initialState.bluePick;
+      state.bluePickIndex = initialState.bluePickIndex;
+      state.redBan = initialState.redBan;
+      state.redBanIndex = initialState.redBanIndex;
+      state.redPick = initialState.redPick;
+      state.redPickIndex = initialState.redPickIndex;
     },
   },
 });
@@ -242,6 +258,8 @@ export const {
   addBanPickChampion,
   addTeamBanPickIndex,
   addNullBan,
+  setStatus,
+  initData,
 } = banPickSlice.actions;
 
 export default banPickSlice.reducer;

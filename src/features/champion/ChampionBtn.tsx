@@ -2,10 +2,12 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import {
   addBanPickIndex,
   addTeamBanPickIndex,
+  initData,
   selectBanPickArray,
   selectBanPickIndex,
   selectCurrentBanORPick,
   setRemainingTime,
+  setStatus,
 } from "../ban-pick/banPickSlice";
 
 const ChampionBtn = () => {
@@ -16,20 +18,31 @@ const ChampionBtn = () => {
   const currentBanORPick = useAppSelector(
     selectCurrentBanORPick(currentBanPick)
   );
+  const status = useAppSelector((state) => state.banPick.status);
 
   const handleBtn = () => {
-    if (banPickArray.length - 1 > banPickIndex) {
-      if (currentBanORPick !== "") {
-        dispatch(addTeamBanPickIndex(currentBanPick));
-        dispatch(addBanPickIndex());
+    if (status === "start") {
+      if (banPickArray.length - 1 > banPickIndex) {
+        if (currentBanORPick !== "") {
+          dispatch(addTeamBanPickIndex(currentBanPick));
+          dispatch(addBanPickIndex());
+          dispatch(setRemainingTime());
+        }
+      } else {
+        dispatch(setStatus("done"));
         dispatch(setRemainingTime());
       }
-    } else {
-      console.log("done");
+    } else if (status === "done") {
+      dispatch(initData());
+      dispatch(setStatus("start"));
     }
   };
 
-  return <button onClick={handleBtn}>챔피언 선택</button>;
+  return (
+    <button onClick={handleBtn}>
+      {status === "done" ? "시작하기" : "챔피언 선택"}
+    </button>
+  );
 };
 
 export default ChampionBtn;
