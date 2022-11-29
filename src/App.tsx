@@ -21,6 +21,7 @@ import {
   selectBanPickIndex,
   selectRemainingTime,
   setRemainingTime,
+  setStatus,
   subRemainingTime,
 } from "./features/ban-pick/banPickSlice";
 
@@ -38,14 +39,29 @@ function App() {
   const randomChampionArray = championsAllData.filter(
     (item) => !allTeamBanPick.includes(item.id)
   );
+  const banPickStatus = useAppSelector((state) => state.banPick.status);
 
   useEffect(() => {
-    if (championDatasStatus === "idle") {
-      dispatch(fetchChampionData());
+    async function getVersion() {
+      const response = await fetch(
+        `https://ddragon.leagueoflegends.com/api/versions.json`
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+
+        if (championDatasStatus === "idle") {
+          dispatch(fetchChampionData(data[0]));
+        }
+      }
     }
+
+    getVersion();
   }, [championDatasStatus, dispatch]);
 
   useEffect(() => {
+    if (banPickStatus === "done") return;
+
     const countDown = setInterval(() => {
       if (remainingTime > 0) {
         dispatch(subRemainingTime());
@@ -69,6 +85,16 @@ function App() {
           }
           dispatch(addBanPickIndex());
           dispatch(setRemainingTime());
+        } else {
+          const random = Math.floor(Math.random() * randomChampionArray.length);
+          dispatch(
+            addBanPickChampion({
+              ...currentBanPick,
+              championIMG: randomChampionArray[random].id,
+            })
+          );
+          dispatch(setRemainingTime());
+          dispatch(setStatus("done"));
         }
       }
     }, 1000);
@@ -83,6 +109,7 @@ function App() {
     banPickIndex,
     currentBanPick,
     randomChampionArray,
+    banPickStatus,
   ]);
 
   return (
