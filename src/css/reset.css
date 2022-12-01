@@ -122,6 +122,17 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+input {
+  color: var(--main-font-color);
+  background-color: var(--box-bg-color);
+  border: none;
+}
+button {
+  color: var(--main-font-color);
+  background-color: var(--box-bg-color);
+  border: none;
+}
+
 * {
   box-sizing: border-box;
 }

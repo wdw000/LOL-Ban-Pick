@@ -1,6 +1,7 @@
 .champion-list {
-  height: 100%;
+  height: calc(100% - 6.5rem);
   overflow: scroll;
+  margin: 1rem 0;
   -ms-overflow-style: none;
 }
 
@@ -11,5 +12,6 @@
 .champion-list > ul {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: flex-start;
+  justify-content: stretch;
 }

@@ -15,19 +15,24 @@ const Top = () => {
   return (
     <div className="top-ui">
       <div className="top">
-        <p>BLUE</p>
-        <div>
-          <p>
-            {banPickArray[banPickIndex].team} TEAM{" "}
-            {banPickArray[banPickIndex].status}
-          </p>
+        <div className="blue team">
+          <p>BLUE</p>
         </div>
-        <p>RED</p>
+        <div className="ban-pick-status">
+          <div>
+            {banPickArray[banPickIndex].team}{" "}
+            {banPickArray[banPickIndex].status}
+            <br />
+            <span>{remainingTime}</span>
+          </div>
+        </div>
+        <div className="red team">
+          <p>RED</p>
+        </div>
       </div>
 
       <div className="bottom">
         <TimerProgressBar team="BLUE" />
-        <p>{remainingTime}</p>
         <TimerProgressBar team="RED" />
       </div>
     </div>

@@ -114,7 +114,9 @@ function App() {
 
   return (
     <div className="App">
-      <TopUI />
+      <div className="top">
+        <TopUI />
+      </div>
       <div className="main">
         <div className="side">
           <PickList team="BLUE" />

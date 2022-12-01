@@ -9,6 +9,7 @@ import {
   setRemainingTime,
   setStatus,
 } from "../ban-pick/banPickSlice";
+import "./ChampionBtn.css";
 
 const ChampionBtn = () => {
   const dispatch = useAppDispatch();
@@ -39,7 +40,7 @@ const ChampionBtn = () => {
   };
 
   return (
-    <button onClick={handleBtn}>
+    <button className="champion-btn" onClick={handleBtn}>
       {status === "done" ? "시작하기" : "챔피언 선택"}
     </button>
   );

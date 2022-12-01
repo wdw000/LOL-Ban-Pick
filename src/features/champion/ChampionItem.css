@@ -1,10 +1,15 @@
 .champion-item {
-  width: 12.5%;
+  width: 15%;
   text-align: center;
+  margin: 0 0.8%;
 }
 
-.champion-item[class*="hidden"] {
+.champion-item .champion-item[class*="hidden"] {
   display: none;
+}
+
+.champion-item > img {
+  width: 100%;
 }
 
 .champion-item p {
@@ -12,5 +17,16 @@
 }
 
 .champion-item[class*="checked"] > img {
-  filter: grayscale(100%) blur(2px);
+  filter: grayscale(100%) contrast(150%);
+}
+
+.champion-item[class*="checked"] {
+  opacity: 0.2;
+}
+
+@media (min-width: 1024px) {
+  .champion-item {
+    width: 13%;
+    margin: 0 0.6%;
+  }
 }

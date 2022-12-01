@@ -1,5 +1,6 @@
 .pick-list {
-  height: 100%;
+  flex: 1;
+  margin: 1rem 0;
 }
 
 .pick-list > li:not(:last-child) {

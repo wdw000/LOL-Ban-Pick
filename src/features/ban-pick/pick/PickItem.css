@@ -50,12 +50,13 @@
 .pick-item .champion-name {
   top: 1rem;
   right: 1rem;
+  font-weight: bold;
 }
 
 .pick-item .player {
   bottom: 1rem;
   right: 1rem;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .pick-item .champion-name[class*="red"] {
