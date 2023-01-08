@@ -1,13 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 
-interface InitialState {
-  status: "idle" | "loading" | "succeeded" | "failed";
-  error: string | undefined;
-  data: ChampionInfo[];
-  search: string;
-}
-
 interface ChampionData {
   [key: string]: ChampionInfo;
 }
@@ -65,6 +58,13 @@ interface ChampionDatas {
   format: string | null;
   type: string | null;
   version: string | null;
+}
+
+interface InitialState {
+  status: "idle" | "loading" | "succeeded" | "failed";
+  error: string | undefined;
+  data: ChampionInfo[];
+  search: string;
 }
 
 const initialState: InitialState = {

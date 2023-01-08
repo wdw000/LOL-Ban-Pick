@@ -7,7 +7,7 @@ import {
 import TimerProgressBar from "./TimerProgressBar";
 import "./TopUI.css";
 
-const Top = () => {
+const TopUI = () => {
   const remainingTime = useAppSelector(selectRemainingTime);
   const banPickArray = useAppSelector(selectBanPickArray);
   const banPickIndex = useAppSelector(selectBanPickIndex);
@@ -39,4 +39,4 @@ const Top = () => {
   );
 };
 
-export default Top;
+export default TopUI;
